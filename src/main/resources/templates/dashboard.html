@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Dashboard - CSE-H Bank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#543A14",
+              secondary: "#F0BB78",
+              tertiary: "#FFF0DC",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-secondary">
+    <nav class="w-full bg-primary flex text-white justify-between py-4 px-5">
+      <a class="text-4xl" href="#">SSPA Bank</a>
+      <ul class="flex gap-3">
+        <li class="text-white hover:text-gray-200">
+          <a class="nav-link" href="/dashboard">Dashboard</a>
+        </li>
+        <li class="text-white hover:text-gray-200">
+          <a class="nav-link" href="/transactions">Transactions</a>
+        </li>
+        <li class="text-white hover:text-gray-200">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="flex flex-col gap-2 mt-20">
+      <div class="text-center">
+        <h2 class="text-2xl font-bold" th:text="'Welcome, ' + ${account.username}"></h2>
+        <h3 class="text-2xl font-bold" th:text="'Current Balance: $' + ${account.balance}"></h3>
+      </div>
+
+      <!-- Account Details Section -->
+      <div
+        class="flex flex-col gap-3 justify-center items-center border border-primary mt-7 rounded-full py-10 shadow-lg"
+      >
+        <h4>Account Details</h4>
+        <p>
+          <strong>Account Number:</strong> <span th:text="${account.id}"></span>
+        </p>
+        <!-- Use account.id for account number -->
+        <p><strong>Account Type:</strong> Savings</p>
+      </div>
+
+      <div class="flex justify-evenly relative mt-32">
+        <!-- Deposit Section -->
+        <div class="col-md-3">
+          <!-- ---------------------------------------------------------------------------- -->
+          <div class="hs-dropdown inline-flex w-full">
+            <button
+              id="hs-dropdown-deposit"
+              type="button"
+              class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              aria-label="Dropdown"
+            >
+              Deposit
+              <svg
+                class="hs-dropdown-open:rotate-180 size-4"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+
+            <div
+              class="hs-dropdown-deposit-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden absolute left-0 w-screen h-[360px] bg-primary shadow-md rounded-lg mt-20"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="hs-dropdown-deposit"
+            >
+              <form
+                method="post"
+                action="/deposit"
+                class="flex flex-col justify-evenly items-center p-4 h-full gap-3"
+              >
+                <div class="">
+                  <label class="text-xl text-tertiary">Amount: </label>
+                  <input
+                    type="number"
+                    class="rounded-xl py-1 px-3"
+                    name="amount"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="bg-tertiary rounded-2xl py-2 px-4 w-[200px] hover:bg-secondary"
+                >
+                  Deposit
+                </button>
+              </form>
+            </div>
+          </div>
+          <!-- ---------------------------------------------------------------------------- -->
+        </div>
+
+        <!-- Withdraw Section -->
+        <div class="col-md-3">
+          <!-- ---------------------------------------------------------------------------- -->
+          <div class="hs-dropdown inline-flex w-full">
+            <button
+              id="hs-dropdown-withdraw"
+              type="button"
+              class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              aria-label="Dropdown"
+            >
+              Withdraw
+              <svg
+                class="hs-dropdown-open:rotate-180 size-4"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+
+            <div
+              class="hs-dropdown-withdraw-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden absolute left-0 w-screen h-[360px] bg-primary shadow-md rounded-lg mt-20"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="hs-dropdown-withdraw"
+            >
+              <form
+                method="post"
+                action="/deposit"
+                class="flex flex-col justify-evenly items-center p-4 h-full gap-3"
+              >
+                <div class="form-group">
+                  <label class="text-xl text-tertiary">Amount:</label>
+                  <input
+                    type="number"
+                    class="rounded-xl py-1 px-3"
+                    name="amount"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="bg-tertiary rounded-2xl py-2 px-4 w-[200px] hover:bg-secondary"
+                >
+                  Withdraw
+                </button>
+              </form>
+            </div>
+          </div>
+          <!-- ---------------------------------------------------------------------------- -->
+        </div>
+
+        <!-- Transfer Section -->
+        <div class="col-md-3">
+          <!-- ---------------------------------------------------------------------------- -->
+          <div class="hs-dropdown inline-flex w-full">
+            <button
+              id="hs-dropdown-transfer"
+              type="button"
+              class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none w-full"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              aria-label="Dropdown"
+            >
+              Transfer
+              <svg
+                class="hs-dropdown-open:rotate-180 size-4"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+
+            <div
+              class="hs-dropdown-transfer-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden absolute left-0 w-screen h-[360px] bg-primary shadow-md rounded-lg mt-20"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="hs-dropdown-transfer"
+            >
+              <form
+                method="post"
+                action="/transfer"
+                class="flex flex-col justify-evenly items-center p-4 h-full gap-3"
+              >
+                <div class="form-group">
+                  <label class="text-xl text-tertiary"
+                    >Recipient Username:</label
+                  >
+                  <input
+                    type="text"
+                    class="rounded-xl py-1 px-3"
+                    name="toUsername"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="text-xl text-tertiary">Amount:</label>
+                  <input
+                    type="number"
+                    class="rounded-xl py-1 px-3"
+                    name="amount"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="bg-tertiary rounded-2xl py-2 px-4 w-[200px] hover:bg-secondary"
+                >
+                  Transfer
+                </button>
+              </form>
+            </div>
+          </div>
+          <!-- ---------------------------------------------------------------------------- -->
+        </div>
+      </div>
+
+      <p
+        th:if="${error != null}"
+        th:text="${error}"
+        class="error text-center mt-3"
+      ></p>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const dropdownToggle = document.getElementById("hs-dropdown-deposit");
+        const dropdownMenu = document.querySelector(
+          ".hs-dropdown-deposit-menu"
+        );
+
+        dropdownToggle.addEventListener("click", function () {
+          dropdownMenu.classList.toggle("hidden");
+          dropdownMenu.classList.toggle("opacity-100");
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const dropdownToggle = document.getElementById("hs-dropdown-withdraw");
+        const dropdownMenu = document.querySelector(
+          ".hs-dropdown-withdraw-menu"
+        );
+
+        dropdownToggle.addEventListener("click", function () {
+          dropdownMenu.classList.toggle("hidden");
+          dropdownMenu.classList.toggle("opacity-100");
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const dropdownToggle = document.getElementById("hs-dropdown-transfer");
+        const dropdownMenu = document.querySelector(
+          ".hs-dropdown-transfer-menu"
+        );
+
+        dropdownToggle.addEventListener("click", function () {
+          dropdownMenu.classList.toggle("hidden");
+          dropdownMenu.classList.toggle("opacity-100");
+        });
+      });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

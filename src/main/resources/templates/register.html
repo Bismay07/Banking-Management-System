@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <script src="https://cdn.tailwindcss.com"></script><script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                primary: '#543A14',
+                secondary: '#F0BB78',
+                tertiary: '#FFF0DC'
+              }
+            }
+          }
+        }
+      </script>
+</head>
+<body class="relative bg-secondary h-screen flex items-center justify-center">
+    <nav class="absolute top-0 bg-primary w-full flex justify-center pt-4 pb-3 border-b border-slate-800">
+        <h1 class="text-white text-4xl">Crypto Bank</h1>
+    </nav>
+    <div class="bg-primary p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6 text-center text-white">Create an Account</h2>
+        <form method="post" action="/register">
+            <div class="mb-4">
+                <label for="username" class="block text-sm font-medium text-white mb-2">Username</label>
+                <input type="text" id="username" name="username" required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-white mb-2">Password</label>
+                <input type="password" id="password" name="password" required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+            </div>
+            <button type="submit"
+                class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-300">
+                Register
+            </button>
+        </form>
+        <p class="mt-4 text-center text-sm text-secondary">
+            Already have an account? 
+            <a href="/login" class="text-blue-500 hover:text-blue-300 font-medium">Login now</a>
+        </p>
+        <div th:if="${error}" class="text-red-600 mt-3 text-center">
+            User already exist.
+        </div>
+    </div>
+</body>
+</html>

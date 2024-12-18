@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.gradient-background {
+  background: linear-gradient(135deg, #4a1d3d 0%, #8e6b23 50%, #8e8e23 100%);
+  min-height: 100vh;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.button-primary {
+  background-color: #ffd700;
+  color: #000000;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  width: 100%;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.button-primary:hover {
+  background-color: #ffed4a;
+}
+
+.button-secondary {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  width: 100%;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.button-secondary:hover {
+  background-color: #1a1a1a;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #ffd700;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  color: #ffd700;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer a {
+  color: #ffd700;
+  text-decoration: none;
+}
